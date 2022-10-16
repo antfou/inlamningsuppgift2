@@ -1,0 +1,28 @@
+Uppgift:
+från textfilen:
+skriver in person nummer och/eller namn och kollar om det vart mindre än 1 år sedan medlemsavgiften betalades.
+
+pt1:
+if (betalande kund innom ett år = true)
+    sout(namn på person och att de får gymma)
+else
+    sout(namn på person och att de inte får gymma/ inte ligger i registret)
+
+pt2:
+när man söker efter kundens namn
+if((betalande kund innom ett år = false)
+    do nothing
+else
+    printa kundens personnr och namn i en ny fil med dagens datum
+
+
+
+
+
+    void compareDate() {
+            LocalDate date1 = LocalDate.now().minusYears(1);
+            LocalDate date2 = LocalDate.parse("2022-04-17");
+
+            assertTrue(date1.compareTo(date2) < 0); //returnar true om datum1 var före datum2, dvs om datum 2 inträffade inom det senaste året.
+            assertFalse(date1.compareTo(date2) > 0);
+        }
