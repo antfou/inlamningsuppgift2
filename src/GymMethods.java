@@ -29,7 +29,7 @@ public class GymMethods {
 
         }
 
-    public String userInput() {
+    public String userInput() { //Inte testad
         System.out.println("Leta efter kund i systemet:");
         System.out.println("Skriv in för och efternamn eller personnummer: ");
         String userInput = s.nextLine();

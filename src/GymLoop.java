@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class GymLoop extends BestGymEver{
 
 
-    public void userLoop (String userInput) {
+    public void userLoop (String userInput) { //Inte testad
         Path inFilePath = Paths.get("src/customers.txt");
         Path outFilePath = Paths.get("src/trainersList.txt");
 
@@ -25,7 +25,10 @@ public class GymLoop extends BestGymEver{
                 }
             }
             if (!existsInFile){
-                System.out.println("Denna person finns inte i systemet.");
+                if(userInput.isEmpty()){ //Ifall user input är tom
+                    System.out.println("Du skrev inte in någonting.");
+                }else{System.out.println("Denna person finns inte i systemet."); //Ifall user input inte matchar någon i textfilen
+                }
             }
 
         } catch (FileNotFoundException a) {

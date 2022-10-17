@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class BestGymEver extends GymMethods {
 
-    public Boolean checkAndPrintUser(Scanner scanner, PrintWriter writer, String userInput) {
+    public Boolean checkAndPrintUser(Scanner scanner, PrintWriter writer, String userInput) { //Inte testad
         String tempString1 = "";
         String tempString2 = "";
         boolean existsInFile = false;

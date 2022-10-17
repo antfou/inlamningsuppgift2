@@ -1,1 +1,1 @@
-TODO: User input/felsökning
+TODO: uppgift 9b separera input och output
