@@ -1,77 +1,46 @@
+import javax.swing.*;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
-public class BestGymEver {
-    Path inFilePath = Paths.get("src/customers.txt");
-    Path outFilePath = Paths.get("src/trainersList.txt");
+public class BestGymEver extends GymMethods {
 
-
-    public void mainFunction(Scanner scanner, PrintWriter printer) {
-        List<String> fullList = new ArrayList<>();
+    public Boolean checkAndPrintUser(Scanner scanner, PrintWriter writer, String userInput) {
         String tempString1 = "";
         String tempString2 = "";
-            while(scanner.hasNextLine()){
-                if(scanner.hasNext()){
-                    tempString1 = scanner.nextLine();}
-                if(scanner.hasNext()){
-                    tempString2 = scanner.nextLine();}
+        boolean existsInFile = false;
+        if (scanner.hasNext()) {
+            tempString1 = scanner.nextLine();
+            if (scanner.hasNext()) {
+                tempString2 = scanner.nextLine();
+            }
+            boolean namn = getNameBool(tempString1, userInput);
+            boolean idNr = getIDnr(tempString1, userInput);
+            boolean date = compareDate(tempString2);
+
+            if (namn || idNr) {
+                System.out.println(getName(tempString1) + " finns i systemet.");
+                existsInFile = true;
+                if (date) {
+                    System.out.println(getName(tempString1) + " har betalat årsavgiften och får träna");
+                    writer.println("Kund: " + tempString1 + "\nTränade senast: " + LocalDate.now() + "\n");
+                } else {
+                    System.out.println(getName(tempString1) + " har tyvär inte betalat årsavgiften.");
                 }
-    }
-
-    public BestGymEver() {
-        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(outFilePath));
-             Scanner scanner = new Scanner(inFilePath);) {
-        } catch (FileNotFoundException a) {
-            System.out.println("Filen låg inte där den borde ligga");
-            a.printStackTrace();
-            System.exit(0);
-        } catch (IOException b) {
-            System.out.println("Writern bråkar");
-            b.printStackTrace();
-            System.exit(0);
-        } catch (Exception c) {
-            System.out.println("Nu blev något fel");
-            c.printStackTrace();
-            System.exit(0);
+            }
         }
+        return existsInFile;
     }
 
-    public boolean getName(String line, String inputName) {
-        String[] stringArray = line.split(",");
-        String nameFromFile = stringArray[1].trim();
-        if (inputName.equalsIgnoreCase(nameFromFile)){
-            return true;
-        }else{
-            return false;
-        }
 
-    }
-
-    public boolean getIDnr(String line, String inputIDnr) {
-        String[] stringArray = line.split(",");
-        String idNRFromFile = stringArray[0].trim();
-        if (inputIDnr.equalsIgnoreCase(idNRFromFile)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean compareDate(String inputDate){
-        LocalDate date1 = LocalDate.now().minusYears(1);
-        LocalDate date2 = LocalDate.parse(inputDate);
-        if(date1.compareTo(date2)<0){
-            return true;}
-        else{
-            return false;
-        }
-    }
 }

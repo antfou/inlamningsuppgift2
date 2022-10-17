@@ -1,5 +1,1 @@
-TODO: Boolean test + Boolean aktivt konto.
-TODO: in-data till en arraylist.
-TODO: hitta person i listan
-TODO: check of person i listan är en betalande kund
-TODO: printa betalande kunder i en ny textfil
+TODO: User input/felsökning
